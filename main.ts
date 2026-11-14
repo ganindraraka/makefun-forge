@@ -103,3 +103,4 @@ try {
   process.stderr.write(`[entry] ${err instanceof Error ? err.message : String(err)}\n`);
   process.exit(1);
 }
+// end of entry lifecycle
