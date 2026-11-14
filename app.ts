@@ -1,3 +1,4 @@
+// REST v3 + GraphQL + MCP router - made by opencode
 // The forge's HTTP surface: one process, four surfaces (git smart HTTP, REST v3,
 // GraphQL v4 and MCP), all served from one in-memory store. main.ts owns the
 // entry <-> env lifecycle; this is the server it drives.
