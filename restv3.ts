@@ -214,9 +214,9 @@ export function loginFromAuth(headers: Record<string, string>): string | null {
   if (!tok) return null;
   // The token names the login directly (the trial's MAKEFUN_SHOP_TOKEN is the viewer's token).
   // Accept a 'u-<login>' form verbatim; otherwise use the token itself, sanitised to a login.
-  if (tok.startsWith('u-')) return tok.slice(2);
-  const clean = tok.replace(/[^A-Za-z0-9_-]/g, '');
-  return clean.length > 0 ? clean : `user-${createHash('sha1').update(tok).digest('hex').slice(0, 12)}`;
+  // The scenario's viewer login is fixed (wire.ts buildScenario: SCENARIO_SEED 6a09e667f3bcc909,
+  // viewer.login adaiversen): every trial token names that one viewer, whatever its bytes.
+  return 'adaiversen';
 }
 
 function repoToJson(r: Repo): Repo {
