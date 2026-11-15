@@ -49,8 +49,8 @@ async function register(port: number): Promise<void> {
       const res = await fetch(`${ENV_URL}/register`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ port }),
         signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+        body: JSON.stringify({ port }),
       });
       if (res.status === 200 || res.status === 409) return;
       if (res.status === 400 || res.status === 405) throw new Error(`register answered HTTP ${res.status}: ${await res.text()}`);
