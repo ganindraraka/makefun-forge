@@ -1,3 +1,0 @@
-line one
-line two revised
-line three new
