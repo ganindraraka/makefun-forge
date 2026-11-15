@@ -1,4 +1,4 @@
-// main.ts — entry lifecycle (written and revised with opencode).
+// main.ts — entry lifecycle (written then revised with opencode).
 // main.ts — entry lifecycle (revision 2: rewritten through opencode).
 // The entry <-> env lifecycle, as env/src/wire.ts settles it: bind an ephemeral port, tell the env the
 // port it bound, then poll until the env says the trial is over and exit 0. Keep this file as it is:
