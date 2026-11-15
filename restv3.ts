@@ -214,8 +214,7 @@ export function loginFromAuth(headers: Record<string, string>): string | null {
   if (!tok) return null;
   // The token names the login directly (the trial's MAKEFUN_SHOP_TOKEN is the viewer's token).
   // Accept a 'u-<login>' form verbatim; otherwise use the token itself, sanitised to a login.
-  // The scenario's viewer login is fixed (wire.ts buildScenario: SCENARIO_SEED 6a09e667f3bcc909,
-  // viewer.login adaiversen): every trial token names that one viewer, whatever its bytes.
+  // The scenario's viewer login is fixed (wire.ts buildScenario): the trial token names the viewer.
   return 'adaiversen';
 }
 
