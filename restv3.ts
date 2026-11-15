@@ -87,8 +87,7 @@ interface Pull {
 export interface RestCommit {
   sha: string;
   message: string;
-  tree: string;
-  parents: string[];
+  tree: string;  parents: string[];
   author: { name: string; email: string; date: string };
   committer: { name: string; email: string; date: string };
   branch: string; // branch name (without refs/heads/) this commit was made on
@@ -133,7 +132,6 @@ export function createStore(baseUrl = 'https://forge.local'): Store {
     issueJsonCache: new Map(),
   };
 }
-
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
@@ -177,8 +175,7 @@ function nextId(store: Store): number {
 /**
  * A reply whose body has already been serialized to a JSON string. The server writes it verbatim, so
  * hot read paths never re-stringify the same object. The `body` field keeps the parsed shape for any
- * caller that reads it; the server prefers `rawBody` when present.
- */
+ * caller that reads it; the server prefers `rawBody` when present. */
 function replyRaw(status: number, text: string) {
   return {
     status,
@@ -403,7 +400,6 @@ export function handleRest(
   if (!login) {
     return fail(401, 'Requires authentication');
   }
-
   // ---- GET /user — the token owner's own login (the repository owner) ----
   if (segs.length === 1 && segs[0] === 'user' && M === 'GET') {
     return reply(200, { login, id: 1000, name: login, type: 'User', site_admin: false });
@@ -577,7 +573,7 @@ export function handleRest(
       return fail(404, 'Not Found');
     }
 
-    // /repos/{o}/{r}/pulls[/{number}[/files|merge]]
+    // /repos/{o}/{r}/pulls[/{number}|/files|merge]]
     if (rest[0] === 'pulls') {
       if (rest.length === 1) {
         if (M === 'POST') {
@@ -718,9 +714,8 @@ function patchRepo(repo: Repo, input: any) {
   }
   return reply(200, repoToJson(repo));
 }
-
 function computeBlobSha(contentB64: string): string {
-  // Git blob sha1: sha1("blob " + len + "\0" + raw)
+  // Git blob sha1: sha1(\"blob \" + len + \"\0\" + raw)
   const raw = Buffer.from(contentB64, 'base64');
   const header = Buffer.from(`blob ${raw.length}\0`, 'utf8');
   return createHash('sha1').update(Buffer.concat([header, raw])).digest('hex');
@@ -762,7 +757,6 @@ function putContent(owner: string, name: string, path: string, input: any, store
   store.files.set(k, blob);
   const repo = findRepo(store, owner, name);
   if (repo) repo.updated_at = ts;
-
   const content = {
     name: path.split('/').pop(),
     path,
@@ -1122,7 +1116,6 @@ function restCommitJson(c: RestCommit): any {
     parents: c.parents.map((p) => ({ sha: p })),
   };
 }
-
 /** A commit object in GitHub's shape, from a raw git commit view. */
 function gitCommitJson(store: Store, owner: string, name: string, sha: string, view: { tree: string; parents: string[]; author: string; committer: string; message: string }): any {
   const split = (ident: string): { name: string; email: string; date: string } => {
@@ -1213,7 +1206,6 @@ function listCommits(owner: string, name: string, query: URLSearchParams, store:
       if (view) out.push(gitCommitJson(store, owner, name, s, view));
     }
   };
-
   let refName: string | null;
   if (shaParam) {
     // A sha argument: treat it as a ref name if it is not a raw oid, else as an oid.
