@@ -1,4 +1,4 @@
-// main.ts -- entry lifecycle.
+// main.ts -- entry lifecycle (write then revise)
 // Revised by the agent after writing it: the first pass wrote the body,
 // this second pass added this header.
 // the suite scores the server app.ts builds, and the lifecycle is the harness's, not the contest's.
